@@ -1,0 +1,11 @@
+<resources>
+  <string name="app_name">Craps</string>
+  <string name="plays">Plays:</string>
+  <string name="wins">Wins:</string>
+  <string name="winning_percentage">Winning Percentage:</string>
+  <string name="play_button">Play</string>
+  <string name="play_off_button">Play Off</string>
+  <string name="play_on_button">Play On</string>
+  <string name="reset_button">Reset</string>
+  <string name="roll_format">[%1$d] [%2$d] =%3$d</string>
+</resources>
