@@ -3,4 +3,7 @@
   <color name="colorPrimary">#3F51B5</color>
   <color name="colorPrimaryDark">#303F9F</color>
   <color name="colorAccent">#FF4081</color>
+  <color name="losing_roll">#C0FF0000</color>
+  <color name="winning_roll">#C000FF00</color>
+  <color name="tally_line">#C0E0E0E0</color>
 </resources>

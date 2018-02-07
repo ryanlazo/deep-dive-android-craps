@@ -22,9 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
   private static final String FACE_PREFIX = "face_";
 
-  private TextView playsValue;
-  private TextView winsValue;
-  private TextView winsPercentage;
+
+  private TextView tally;
   private Button play;
   private ToggleButton run;
   private Button reset;
@@ -40,9 +39,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    playsValue = findViewById(R.id.plays_value);
-    winsValue = findViewById(R.id.wins_value);
-    winsPercentage = findViewById(R.id.percentage_value);
+    tally = findViewById(R.id.tally);
     play = findViewById(R.id.play);
     run = findViewById(R.id.play_on);
     reset = findViewById(R.id.reset);
@@ -50,26 +47,13 @@ public class MainActivity extends AppCompatActivity {
     game = new Game();
     faces = loadDiceFaces();
     setupEvents();
+    updateDisplay();
 
   }
 
   private void setupEvents() {
     play.setOnClickListener(new PlayButtonListener());
-//    play.setOnClickListener(new OnClickListener() {
-//      @Override
-//      public void onClick(View v) {
-//        Craps.State state = game.play();
-//        long wins = game.getWins();
-//        long losses = game.getLosses();
-//        long plays = wins + losses;
-//        double percentage = 100.0 * wins / plays;
-//        playsValue.setText(String.format("%d", plays));
-//        winsValue.setText(String.format("%d", wins));
-//        winsPercentage.setText(String.format("%.2f%%", percentage));
-//        rollsList.setAdapter(new DiceTextAdapter(
-//            MainActivity.this, R.layout.item_roll, game.getCraps().getRolls(), state));
-//      }
-//    });
+
     reset.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -110,9 +94,7 @@ public class MainActivity extends AppCompatActivity {
     }
     long plays = wins + losses;
     double percentage = (plays > 0) ? (100.0 * wins / plays) : 0;
-    playsValue.setText(String.format("%,d", plays));
-    winsValue.setText(String.format("%,d", wins));
-    winsPercentage.setText(String.format("%.2f%%", percentage));
+   tally.setText(getString(R.string.tally_format, wins, plays, percentage));
     rollsList.setAdapter(new DiceImageAdapter(
         MainActivity.this, R.layout.item_roll_dice, rolls, state, faces));
 }
@@ -137,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class Runner extends Thread {
 
-      public static final int UPDATE_INTERVAL = 1000;
+      public static final int UPDATE_INTERVAL = 100_000;
 
       @Override
       public void run() {
@@ -155,6 +137,12 @@ public class MainActivity extends AppCompatActivity {
             });
           }
         }
+        runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            updateDisplay();
+          }
+        });
       }
 
     }

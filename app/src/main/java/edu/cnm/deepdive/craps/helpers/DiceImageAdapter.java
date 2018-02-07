@@ -23,22 +23,24 @@ public class DiceImageAdapter extends ArrayAdapter<int[]> {
 private int resourceId;
 private List<int[]> rolls;
 private Craps.State state;
+private int winColor;
+private int loseColor;
 
 
-
-  public DiceImageAdapter(
+    public DiceImageAdapter(
       Context context, int resource, List<int[]> objects, Craps.State state, Drawable[] faces) {
     super(context, resource, objects);
     this.resourceId = resource;
     this.rolls = objects;
     this.state = state;
     this.faces = faces;
+    winColor = context.getResources().getColor(R.color.winning_roll);
+    loseColor = context.getResources().getColor(R.color.losing_roll);
   }
 
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     int[] roll = rolls.get(position);
-    //TODO get views for dice_0, dice_1, dice_total and populate them.
     LinearLayout view =
         (LinearLayout) LayoutInflater.from(getContext()).inflate(resourceId, null, false);
     ImageView dice0 = view.findViewById(R.id.dice_0);
@@ -49,9 +51,9 @@ private Craps.State state;
     diceTotal.setText(getContext().getString(R.string.roll_total_format, roll[0] + roll[1]));
     if (position == rolls.size() -1) {
       if (state == Craps.State.WIN) {
-        view.setBackgroundColor(Color.BLUE);
+        view.setBackgroundColor(winColor);
       }else {
-        view.setBackgroundColor(Color.RED);
+        view.setBackgroundColor(loseColor);
 
       }
     }
