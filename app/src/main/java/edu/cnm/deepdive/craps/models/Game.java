@@ -25,6 +25,7 @@ public class Game {
   public void reset() {
     wins = 0;
     losses = 0;
+    craps.reset();
   }
   public Craps getCraps() {
     return craps;
