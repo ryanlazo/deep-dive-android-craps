@@ -14,8 +14,8 @@ import android.widget.ToggleButton;
 import edu.cnm.deepdive.craps.R;
 import edu.cnm.deepdive.craps.helpers.DiceImageAdapter;
 import edu.cnm.deepdive.craps.helpers.DiceTextAdapter;
-import edu.cnm.deepdive.craps.models.Craps;
-import edu.cnm.deepdive.craps.models.Game;
+import edu.cnm.deepdive.craps.model.Craps;
+import edu.cnm.deepdive.craps.model.Game;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
